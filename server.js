@@ -21,8 +21,10 @@ app.use(morgan("dev"));
 dbConnect();
 
 //here are importing all the routers
+import productsRouter from "./src/routers/productsRouter.js";
 
 //here is using all the routers
+app.use("/api/v1/products", productsRouter);
 
 //creating default route
 app.get("/", (req, res) => {
