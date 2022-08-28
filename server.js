@@ -22,9 +22,11 @@ dbConnect();
 
 //here are importing all the routers
 import productsRouter from "./src/routers/productsRouter.js";
+import categoriesRouter from "./src/routers/categoryRouter.js";
 
 //here is using all the routers
 app.use("/api/v1/products", productsRouter);
+app.use("/api/v1/categories", categoriesRouter);
 
 //creating default route
 app.get("/", (req, res) => {
