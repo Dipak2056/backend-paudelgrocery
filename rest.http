@@ -1,1 +1,8 @@
-GET http://localhost:8000/api/v1/categories
+GET http://localhost:8000/api/v1/products/62b057191d3c44dc152ab25a
+
+### get categories by parentcatId
+GET http://localhost:8000/api/v1/categories/62b056fd1d3c44dc152ab251
+
+
+
+

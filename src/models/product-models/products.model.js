@@ -4,3 +4,8 @@ import productsSchema from "./products.schema.js";
 export const getAllProducts = (filter) => {
   return productsSchema.find(filter);
 };
+
+//@ filter must be an object
+export const getProductsByCategory = (filter) => {
+  return productsSchema.find(filter);
+};
