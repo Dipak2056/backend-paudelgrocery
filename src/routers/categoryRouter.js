@@ -13,7 +13,9 @@ router.get("/", async (req, res) => {
 router.get("/:parentCatId", async (req, res) => {
   const { parentCatId } = req.params;
   const categoryByCatId = await getCategoriesByParentCat({ parentCatId });
-  res.send(categoryByCatId);
+  let subCategoriesArray = [];
+  categoryByCatId.forEach((item) => subCategoriesArray.push(item._id));
+  res.json(subCategoriesArray);
 });
 
 export default router;

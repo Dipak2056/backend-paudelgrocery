@@ -1,4 +1,13 @@
-GET http://localhost:8000/api/v1/products/62b057191d3c44dc152ab25a
+POST  http://localhost:8000/api/v1/products
+Content-Type: application/json
+
+[
+  "62b057191d3c44dc152ab25a",
+  "62b0571f1d3c44dc152ab25d",
+  "62b057251d3c44dc152ab260",
+  "62b057941d3c44dc152ab26c"
+]
+
 
 ### get categories by parentcatId
 GET http://localhost:8000/api/v1/categories/62b056fd1d3c44dc152ab251

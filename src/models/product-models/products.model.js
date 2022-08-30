@@ -6,6 +6,10 @@ export const getAllProducts = (filter) => {
 };
 
 //@ filter must be an object
-export const getProductsByCategory = (filter) => {
-  return productsSchema.find(filter);
+export const getProductsByCategory = (arg) => {
+  return productsSchema.find({
+    catId: {
+      $in: arg,
+    },
+  });
 };
