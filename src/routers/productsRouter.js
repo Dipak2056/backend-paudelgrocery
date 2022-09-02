@@ -16,4 +16,6 @@ router.post("/?", async (req, res) => {
   res.send(productsById);
 });
 
+//to get all the products by catId
+
 export default router;
