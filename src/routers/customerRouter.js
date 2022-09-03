@@ -3,6 +3,7 @@ import { encryptPassword, verifyPassword } from "../helpers/bcrypthelper.js";
 import {
   getCustomer,
   insertCustomer,
+  updateCustomer,
 } from "../models/customer-models/customer.model.js";
 const router = express.Router();
 //route to get specific customer
@@ -37,11 +38,8 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
-//route to update customer
-router.put("/", (req, res) => {
-  res.send("i am also working mama");
-});
-//route to log customer in email and password
+
+//route to login customer with email and password
 router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -66,6 +64,40 @@ router.post("/login", async (req, res, next) => {
     });
   } catch (error) {
     error.status = 500;
+    next(error);
+  }
+});
+
+//update the detail of customer except password
+router.put("/", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const customer = await getCustomer({ email });
+
+    if (customer?._id) {
+      const matched = verifyPassword(password, customer.password);
+
+      if (matched) {
+        const { _id, email, password, ...rest } = req.body;
+        const updatedCustomer = await updateCustomer({ email }, rest);
+        res.json({
+          status: "success",
+          message: "Your profile has been updated successfully.",
+          customer: updatedCustomer,
+        });
+      } else {
+        res.json({
+          status: "error",
+          message: "Invalid request, Your profile couldnot get updated",
+        });
+      }
+    }
+  } catch (error) {
+    if (error.message.includes("E110000 duplicate key")) {
+      error.message =
+        "Email already exists, please use another email and try again.";
+      error.status = 200;
+    }
     next(error);
   }
 });
