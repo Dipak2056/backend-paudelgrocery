@@ -23,15 +23,25 @@ dbConnect();
 //here are importing all the routers
 import productsRouter from "./src/routers/productsRouter.js";
 import categoriesRouter from "./src/routers/categoryRouter.js";
+import customerRouter from "./src/routers/customerRouter.js";
 
 //here is using all the routers
 app.use("/api/v1/products", productsRouter);
 app.use("/api/v1/categories", categoriesRouter);
+app.use("/api/v1/customer", customerRouter);
 
 //creating default route
 app.get("/", (req, res) => {
   res.json({
     message: "you have reached the api end point.",
+  });
+});
+//global error handling
+app.use((err, req, res, next) => {
+  res.status(err.status || 404);
+  res.json({
+    status: "error",
+    message: err.message,
   });
 });
 
