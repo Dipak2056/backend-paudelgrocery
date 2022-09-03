@@ -1,4 +1,5 @@
 import express from "express";
+import { encryptPassword } from "../helpers/bcrypthelper.js";
 import { insertCustomer } from "../models/customer-models/customer.model.js";
 const router = express.Router();
 //route to get specific customer
@@ -8,6 +9,10 @@ router.get("/", (req, res) => {
 //route to post the new customer
 router.post("/", async (req, res, next) => {
   try {
+    //encrypting password
+    const hashedPassword = encryptPassword(req.body.password);
+    req.body.password = hashedPassword;
+
     const result = await insertCustomer(req.body);
     if (result?._id) {
       res.json({
