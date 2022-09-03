@@ -7,6 +7,9 @@ export const insertCustomer = (obj) => {
 
 //get customer
 //@filter must be an object
+export const getCustomer = (filter) => {
+  return customerSchema.findOne(filter);
+};
 //get customer by id
 export const getCustomerById = (_id) => {
   return customerSchema.findById(_id);

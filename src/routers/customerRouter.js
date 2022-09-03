@@ -1,6 +1,9 @@
 import express from "express";
-import { encryptPassword } from "../helpers/bcrypthelper.js";
-import { insertCustomer } from "../models/customer-models/customer.model.js";
+import { encryptPassword, verifyPassword } from "../helpers/bcrypthelper.js";
+import {
+  getCustomer,
+  insertCustomer,
+} from "../models/customer-models/customer.model.js";
 const router = express.Router();
 //route to get specific customer
 router.get("/", (req, res) => {
@@ -37,6 +40,34 @@ router.post("/", async (req, res, next) => {
 //route to update customer
 router.put("/", (req, res) => {
   res.send("i am also working mama");
+});
+//route to log customer in email and password
+router.post("/login", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    //get the customer according to their email address
+    const customer = await getCustomer({ email });
+    if (customer?._id) {
+      const matched = verifyPassword(password, customer.password);
+      if (matched) {
+        customer.password = undefined;
+        res.json({
+          status: "success",
+          message: "Customer Logged in Successfully",
+          customer,
+        });
+        return;
+      }
+    }
+    res.status(401).json({
+      status: "error",
+      message: "Invalid login credentials",
+    });
+  } catch (error) {
+    error.status = 500;
+    next(error);
+  }
 });
 
 export default router;

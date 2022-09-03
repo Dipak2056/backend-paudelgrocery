@@ -8,13 +8,17 @@ const PORT = 8000 || process.env.PORT;
 
 //importing all middlewares
 import cors from "cors";
-import helmet from "helmet";
+import helmet, { crossOriginResourcePolicy } from "helmet";
 import morgan from "morgan";
 
 //middle wares will go here
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
 app.use(morgan("dev"));
 
 //here is the connection to the database goes
