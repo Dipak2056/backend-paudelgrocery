@@ -17,11 +17,12 @@ router.post("/", async (req, res, next) => {
     const hashedPassword = encryptPassword(req.body.password);
     req.body.password = hashedPassword;
 
-    const result = await insertCustomer(req.body);
-    if (result?._id) {
+    const customer = await insertCustomer(req.body);
+    if (customer?._id) {
       res.json({
         status: "success",
         message: "new customer created successfully.",
+        customer,
       });
     } else {
       res.json({

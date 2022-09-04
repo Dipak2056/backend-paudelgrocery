@@ -17,13 +17,13 @@ GET http://localhost:8000/api/v1/categories/62b056fd1d3c44dc152ab251
 GET http://localhost:8000/api/v1/customer
 
 ### post customer
-PUT  http://localhost:8000/api/v1/customer
+POST  http://localhost:8000/api/v1/customer
 Content-Type: application/json
 
 {
   "fName":"Diplove",
   "lName":"paudel",
-  "email":"paudelsantosh510@gmail.com",
+  "email":"paudelsan@gmail.com",
   "password":"dipak1234",
   "address":"3/25 cecil street,Ashfield,NSW 2131",
   "phone":"0452450089",
