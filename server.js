@@ -28,11 +28,13 @@ dbConnect();
 import productsRouter from "./src/routers/productsRouter.js";
 import categoriesRouter from "./src/routers/categoryRouter.js";
 import customerRouter from "./src/routers/customerRouter.js";
+import stripeRouter from "./src/routers/stripeRouter.js";
 
 //here is using all the routers
 app.use("/api/v1/products", productsRouter);
 app.use("/api/v1/categories", categoriesRouter);
 app.use("/api/v1/customer", customerRouter);
+app.use("/api/v1/stripe", stripeRouter);
 
 //creating default route
 app.get("/", (req, res) => {

@@ -8,6 +8,11 @@ Content-Type: application/json
   "62b057941d3c44dc152ab26c"
 ]
 
+###get all products
+GET  http://localhost:8000/api/v1/products
+
+
+
 
 ### get categories by parentcatId
 GET http://localhost:8000/api/v1/categories/62b056fd1d3c44dc152ab251
@@ -45,3 +50,9 @@ Content-Type: application/json
 
 
 
+
+### stripe
+POST  http://localhost:8000/api/v1/stripe
+Content-Type: application/json
+
+{"items":[{"_id":"62c3ae7ed51c361f2b2ea95b", "quantity":2},{"_id":"63058ebe8b9b0fedf91749a4", "quantity":2}]}

@@ -56,14 +56,13 @@ router.post("/login", async (req, res, next) => {
           message: "Customer Logged in Successfully",
           customer,
         });
-        return;
+      } else {
+        res.status(401).json({
+          status: "error",
+          message: "Invalid login credentials",
+        });
       }
-      e;
     }
-    res.status(401).json({
-      status: "error",
-      message: "Invalid login credentials",
-    });
   } catch (error) {
     error.status = 500;
     next(error);
