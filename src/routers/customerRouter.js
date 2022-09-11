@@ -1,5 +1,6 @@
 import express from "express";
 import { encryptPassword, verifyPassword } from "../helpers/bcrypthelper.js";
+import { loginValidation } from "../middlewares/joi-validation/signupValidation.js";
 import {
   getCustomer,
   insertCustomer,
@@ -41,11 +42,9 @@ router.post("/", async (req, res, next) => {
 });
 
 //route to login customer with email and password
-router.post("/login", async (req, res, next) => {
+router.post("/login", loginValidation, async (req, res, next) => {
   try {
     const { email, password } = req.body;
-
-    //get the customer according to their email address
     const customer = await getCustomer({ email });
     if (customer?._id) {
       const matched = verifyPassword(password, customer.password);
