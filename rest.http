@@ -22,11 +22,11 @@ GET http://localhost:8000/api/v1/categories/62b056fd1d3c44dc152ab251
 GET http://localhost:8000/api/v1/customer
 
 ### post customer
-POST  http://localhost:8000/api/v1/customer
+PUT  http://localhost:8000/api/v1/customer
 Content-Type: application/json
 
 {
-  "fName":"Diplove",
+  "fName":"Diplak",
   "lName":"paudel",
   "email":"paudelsan@gmail.com",
   "password":"dipak1234",

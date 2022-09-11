@@ -8,6 +8,10 @@ export const DOB = Joi.date().allow(null);
 export const DATE = Joi.date();
 export const PASSWORD = Joi.string().required();
 export const REQUIREDSTR = Joi.string().required();
+export const SHORTSTR = Joi.string().max(100);
+export const LONGSTR = Joi.string().max(5000);
+export const PRICE = Joi.number().max(10000);
+export const QTY = Joi.number().max(1000);
 
 export const validator = (schema, req, res, next) => {
   const { value, error } = schema.validate(req.body);

@@ -1,6 +1,10 @@
 import express from "express";
 import { encryptPassword, verifyPassword } from "../helpers/bcrypthelper.js";
-import { loginValidation } from "../middlewares/joi-validation/signupValidation.js";
+import {
+  loginValidation,
+  newCustomerValidation,
+  updateCustomerValidation,
+} from "../middlewares/joi-validation/signupValidation.js";
 import {
   getCustomer,
   insertCustomer,
@@ -12,7 +16,7 @@ router.get("/", (req, res) => {
   res.send("hello there i am working.");
 });
 //route to post the new customer
-router.post("/", async (req, res, next) => {
+router.post("/", newCustomerValidation, async (req, res, next) => {
   try {
     //encrypting password
     const hashedPassword = encryptPassword(req.body.password);
@@ -69,7 +73,7 @@ router.post("/login", loginValidation, async (req, res, next) => {
 });
 
 //update the detail of customer except password
-router.put("/", async (req, res, next) => {
+router.put("/", updateCustomerValidation, async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const customer = await getCustomer({ email });

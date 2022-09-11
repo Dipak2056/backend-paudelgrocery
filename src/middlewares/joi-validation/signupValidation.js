@@ -8,6 +8,7 @@ import {
   PASSWORD,
   validator,
   REQUIREDSTR,
+  SHORTSTR,
 } from "./validationsConstant.js";
 
 export const newCustomerValidation = (req, res, next) => {
