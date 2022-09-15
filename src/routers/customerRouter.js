@@ -10,11 +10,11 @@ import {
   insertCustomer,
   updateCustomer,
 } from "../models/customer-models/customer.model.js";
+import { createJWTs } from "../helpers/jwthelper.js";
+import { customerAuth } from "../middlewares/authorization/userauth.js";
 const router = express.Router();
 //route to get specific customer
-router.get("/", (req, res) => {
-  res.send("hello there i am working.");
-});
+router.get("/", customerAuth, (req, res) => {});
 //route to post the new customer
 router.post("/", newCustomerValidation, async (req, res, next) => {
   try {
@@ -54,11 +54,15 @@ router.post("/login", loginValidation, async (req, res, next) => {
       const matched = verifyPassword(password, customer.password);
       if (matched) {
         customer.password = undefined;
+        customer.refreshJWT = undefined;
+        const jwts = await createJWTs({ email: customer.email });
         res.json({
           status: "success",
           message: "Customer Logged in Successfully",
           customer,
+          ...jwts,
         });
+        return;
       } else {
         res.status(401).json({
           status: "error",
