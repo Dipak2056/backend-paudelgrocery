@@ -39,6 +39,7 @@ Content-Type: application/json
 ### update customer
 GET  http://localhost:8000/api/v1/customer
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpcGVuZHJhMjVAZ21haWwuY29tIiwiaWF0IjoxNjYzMjEwNTE0LCJleHAiOjE2NjMyMTE0MTR9.uPU4ElOevZdB566hUSM_mSoXhCR03HzV7LeIgi0YuzE
+
 ### login customer
 POST http://localhost:8000/api/v1/customer/login
 Content-Type: application/json

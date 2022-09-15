@@ -13,8 +13,22 @@ import {
 import { createJWTs } from "../helpers/jwthelper.js";
 import { customerAuth } from "../middlewares/authorization/userauth.js";
 const router = express.Router();
-//route to get specific customer
-router.get("/", customerAuth, (req, res) => {});
+
+//route to get specific customer by passing the authentication test
+router.get("/", customerAuth, (req, res) => {
+  try {
+    const customer = req.customerInfo;
+    customer.password = undefined;
+    customer.refreshJWT = undefined;
+    res.json({
+      status: "success",
+      message: "GET Method to customer router",
+      customer,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 //route to post the new customer
 router.post("/", newCustomerValidation, async (req, res, next) => {
   try {
