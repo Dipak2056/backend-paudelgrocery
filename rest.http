@@ -37,8 +37,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpcGVuZHJhMjVA
 
 
 ### update customer
-GET  http://localhost:8000/api/v1/customer/accessjwt
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpcGVuZHJhMjVAZ21haWwuY29tIiwiaWF0IjoxNjYzMjE0NjUzLCJleHAiOjE2NjU4MDY2NTN9.DogIJzHGmGHFd9uGKDLkBr2371FHd5UAfMXgvQdfOJY
+GET  http://localhost:8000/api/v1/customer
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpcGVuZHJhMjVAZ21haWwuY29tIiwiaWF0IjoxNjYzMjIwNTY5LCJleHAiOjE2NjMyMjE0Njl9.ztHF9F891UdrLYDMXGZFzz6dQKwv32coxGkn2ufKYUk
 
 ### login customer
 POST http://localhost:8000/api/v1/customer/login
