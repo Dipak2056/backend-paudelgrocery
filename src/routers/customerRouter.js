@@ -133,7 +133,17 @@ router.put(
   }
 );
 
-//to get the access jwt
+//to get the access jwt on the basis of refresh jwt
+//this refresh jwt is stored in database
+//this accessjwt will be stored in the session storage at broswer
+//the refresh jwt will be saved in the local storage of the browser
+//we can access this refresh jwt and ask server to get the access jwt
+//in this process new access jwt will be created and saved in session in backend and session-storage in front end
+//refresh jwt will be created and saved in db, and localstorage at browser
+
+//if the refresh jwt at the frontend expires, we have given 30 days
+//----------user must manually type their login credentials and save new access and refresh jwt
+
 router.get("/accessjwt", async (req, res, next) => {
   try {
     const refreshJWT = req.headers.authorization;
