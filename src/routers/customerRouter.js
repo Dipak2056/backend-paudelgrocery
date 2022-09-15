@@ -10,7 +10,11 @@ import {
   insertCustomer,
   updateCustomer,
 } from "../models/customer-models/customer.model.js";
-import { createJWTs } from "../helpers/jwthelper.js";
+import {
+  createJWTs,
+  signAccessJWT,
+  verifyRefreshJWT,
+} from "../helpers/jwthelper.js";
 import { customerAuth } from "../middlewares/authorization/userauth.js";
 const router = express.Router();
 
@@ -129,4 +133,31 @@ router.put(
   }
 );
 
+//to get the access jwt
+router.get("/accessjwt", async (req, res, next) => {
+  try {
+    const refreshJWT = req.headers.authorization;
+
+    const decoded = verifyRefreshJWT(refreshJWT);
+    if (decoded?.email) {
+      //check refJWT valid and exist in db
+      const user = await getCustomer({ email: decoded.email, refreshJWT });
+      if (user?._id) {
+        //create new access jwt and retur in
+        const accessJWT = await signAccessJWT({ email: decoded.email });
+        res.json({
+          status: "success",
+          accessJWT,
+        });
+      }
+    }
+    res.status(401).json({
+      status: "error",
+      message: "log out user.",
+    });
+  } catch (error) {
+    error.status = 401;
+    next(error);
+  }
+});
 export default router;
