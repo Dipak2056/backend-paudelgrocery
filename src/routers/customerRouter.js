@@ -91,37 +91,42 @@ router.post("/login", loginValidation, async (req, res, next) => {
 });
 
 //update the detail of customer except password
-router.put("/", updateCustomerValidation, async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    const customer = await getCustomer({ email });
+router.put(
+  "/",
+  customerAuth,
+  updateCustomerValidation,
+  async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+      const customer = await getCustomer({ email });
 
-    if (customer?._id) {
-      const matched = verifyPassword(password, customer.password);
+      if (customer?._id) {
+        const matched = verifyPassword(password, customer.password);
 
-      if (matched) {
-        const { _id, email, password, ...rest } = req.body;
-        const updatedCustomer = await updateCustomer({ email }, rest);
-        res.json({
-          status: "success",
-          message: "Your profile has been updated successfully.",
-          customer: updatedCustomer,
-        });
-      } else {
-        res.json({
-          status: "error",
-          message: "Invalid request, Your profile couldnot get updated",
-        });
+        if (matched) {
+          const { _id, email, password, ...rest } = req.body;
+          const updatedCustomer = await updateCustomer({ email }, rest);
+          res.json({
+            status: "success",
+            message: "Your profile has been updated successfully.",
+            customer: updatedCustomer,
+          });
+        } else {
+          res.json({
+            status: "error",
+            message: "Invalid request, Your profile couldnot get updated",
+          });
+        }
       }
+    } catch (error) {
+      if (error.message.includes("E110000 duplicate key")) {
+        error.message =
+          "Email already exists, please use another email and try again.";
+        error.status = 200;
+      }
+      next(error);
     }
-  } catch (error) {
-    if (error.message.includes("E110000 duplicate key")) {
-      error.message =
-        "Email already exists, please use another email and try again.";
-      error.status = 200;
-    }
-    next(error);
   }
-});
+);
 
 export default router;

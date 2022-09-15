@@ -24,13 +24,13 @@ GET http://localhost:8000/api/v1/customer
 ### post customer
 PUT  http://localhost:8000/api/v1/customer
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpcGVuZHJhMjVAZ21haWwuY29tIiwiaWF0IjoxNjYzMjExNDQ1LCJleHAiOjE2NjMyMTIzNDV9.-AoOmnvV3Ise4NuZknTJZQrITehv_mDQurlAb_lmSMY
 
 {
-  "fName":"Diplak",
+  "fName":"Diplokantar",
   "lName":"paudel",
   "email":"paudelsan@gmail.com",
   "password":"dipak1234",
-  "address":"3/25 cecil street,Ashfield,NSW 2131",
   "phone":"0452450089",
   "dob":"02/08/1999"
 }
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 ### update customer
 GET  http://localhost:8000/api/v1/customer
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpcGVuZHJhMjVAZ21haWwuY29tIiwiaWF0IjoxNjYzMjEwNTE0LCJleHAiOjE2NjMyMTE0MTR9.uPU4ElOevZdB566hUSM_mSoXhCR03HzV7LeIgi0YuzE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpcGVuZHJhMjVAZ21haWwuY29tIiwiaWF0IjoxNjYzMjExNDQ1LCJleHAiOjE2NjMyMTIzNDV9.-AoOmnvV3Ise4NuZknTJZQrITehv_mDQurlAb_lmSMY
 
 ### login customer
 POST http://localhost:8000/api/v1/customer/login
