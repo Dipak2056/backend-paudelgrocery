@@ -1,6 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import { dbConnect } from "./config/databaseconnection/db.js";
+//setting view for template receipt for email
+// import { View } from "grandjs/lib/View.js";
+// View.settings.set("views", "./views");
 const app = express();
 
 //declaring port number to use

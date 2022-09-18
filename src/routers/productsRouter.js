@@ -1,4 +1,5 @@
 import express from "express";
+import { simplyemail } from "../helpers/emailhelper.js";
 import {
   getAllProducts,
   getProductsByCategory,
@@ -9,6 +10,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const allProducts = await getAllProducts();
   res.send(allProducts);
+  simplyemail();
 });
 //to get all the products based on catIds
 router.post("/?", async (req, res) => {
